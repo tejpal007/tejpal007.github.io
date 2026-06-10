@@ -55,6 +55,7 @@ nav .wrap{display:flex;justify-content:space-between;align-items:center;height:6
 .logo .dot{background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
 nav .links a{color:var(--soft);font-size:14px;margin-left:24px;transition:color .25s}
 nav .links a:hover{color:var(--ink)}
+#burger{display:none;background:none;border:1px solid var(--line);border-radius:10px;color:var(--ink);width:42px;height:38px;font-size:18px;cursor:pointer;line-height:1}
 
 /* ====== HERO ====== */
 header{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;position:relative}
@@ -175,9 +176,26 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
 
 @media(max-width:760px){
   .about-grid{grid-template-columns:1fr}
-  nav .links a{margin-left:14px;font-size:13px}
   section{padding:80px 0}
-  .cta.ghost{margin-left:0;margin-top:12px}
+  .cta{padding:13px 22px;font-size:14px}
+  .cta.ghost{margin-left:8px}
+  /* mobile nav */
+  #burger{display:flex;align-items:center;justify-content:center}
+  nav .links{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;background:rgba(5,6,15,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);padding:10px 0}
+  nav .links.open{display:flex}
+  nav .links a{margin:0;padding:13px 24px;font-size:15px;border-bottom:1px solid rgba(255,255,255,.04)}
+  nav .links a:last-child{border-bottom:0}
+  #xp{margin-left:auto;margin-right:12px}
+  /* hero */
+  header{min-height:auto;padding:108px 0 64px}
+  h1{font-size:clamp(2rem,8.5vw,2.6rem)}
+  .typer{font-size:1rem;min-height:3em}
+  .hero-sub{font-size:1rem;margin-bottom:30px}
+  .badge{font-size:12px;padding:6px 13px}
+  .stats{margin-top:46px;grid-template-columns:1fr 1fr;gap:12px}
+  .stat{padding:18px 12px}
+  .stat b{font-size:1.5rem}
+  .scroll-hint{display:none}
 }
 /* ====== AI CHAT ORB ====== */
 #orb{position:fixed;bottom:26px;right:26px;z-index:90;width:62px;height:62px;border-radius:50%;border:0;cursor:pointer;
@@ -302,6 +320,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
       <a href="#" id="galaxylink" style="color:var(--violet)">🌌 Galaxy</a>
     </span>
     <span id="xp" title="Explore the site to earn XP"><span class="lvl" id="xplvl">LV1 · Visitor</span><span class="xbar"><i id="xpbar"></i></span></span>
+    <button id="burger" aria-label="Menu">☰</button>
   </div>
 </nav>
 
@@ -719,6 +738,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
     else{ch--;if(ch===0){del=false;li=(li+1)%lines.length}}
     setTimeout(tick,del?22:48);
   })();
+})();
+
+/* ===== Mobile nav ===== */
+(function(){
+  const b=document.getElementById('burger'),links=document.querySelector('nav .links');
+  b.onclick=()=>{const o=links.classList.toggle('open');b.textContent=o?'✕':'☰'};
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');b.textContent='☰'}));
 })();
 
 /* ===== Scroll reveal ===== */
