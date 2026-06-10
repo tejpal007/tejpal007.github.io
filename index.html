@@ -6,7 +6,7 @@
 <title>Tejpal Yadav — Technology Leader · Co-Founder & CTO · AI Builder</title>
 <meta name="description" content="Tejpal Yadav — Technology Leader and Co-Founder & CTO with 8+ years in fintech, SaaS, and AI automation. IIT Mandi graduate based in Bengaluru.">
 <meta property="og:title" content="Tejpal Yadav — Technology Leader · Co-Founder & CTO">
-<meta property="og:description" content="8+ years building fintech, SaaS & AI automation products. Raised $3M seed, scaled to 3B+ GTV.">
+<meta property="og:description" content="8+ years building fintech, SaaS & AI automation products. Raised $2.5M seed, scaled to 3B+ GTV.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪐</text></svg>">
 <style>
@@ -179,6 +179,103 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
   section{padding:80px 0}
   .cta.ghost{margin-left:0;margin-top:12px}
 }
+/* ====== AI CHAT ORB ====== */
+#orb{position:fixed;bottom:26px;right:26px;z-index:90;width:62px;height:62px;border-radius:50%;border:0;cursor:pointer;
+  background:linear-gradient(135deg,#22d3ee,#7c3aed,#f472b6);background-size:200% 200%;animation:orbshift 5s ease infinite;
+  box-shadow:0 0 30px rgba(124,93,250,.55),0 0 70px rgba(34,211,238,.25);display:flex;align-items:center;justify-content:center;font-size:26px;transition:transform .3s}
+#orb:hover{transform:scale(1.12) rotate(8deg)}
+#orb::before{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(167,139,250,.4);animation:orbring 2.4s ease-out infinite}
+@keyframes orbshift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes orbring{0%{transform:scale(.8);opacity:1}100%{transform:scale(1.5);opacity:0}}
+#chat{position:fixed;bottom:104px;right:26px;z-index:95;width:min(390px,calc(100vw - 32px));height:min(560px,calc(100vh - 140px));
+  border:1px solid rgba(167,139,250,.3);border-radius:22px;background:rgba(10,13,31,.92);backdrop-filter:blur(18px);
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.8),0 0 40px rgba(124,93,250,.2);display:flex;flex-direction:column;overflow:hidden;
+  opacity:0;transform:translateY(24px) scale(.96);pointer-events:none;transition:opacity .35s,transform .35s}
+#chat.open{opacity:1;transform:none;pointer-events:auto}
+#chat .c-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+#chat .c-head .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#22d3ee,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:18px}
+#chat .c-head b{font-size:15px;display:block}
+#chat .c-head small{color:#34d399;font-size:12px;display:flex;align-items:center;gap:6px}
+#chat .c-head small::before{content:"";width:7px;height:7px;border-radius:50%;background:#34d399}
+#chat .c-head .x{margin-left:auto;background:none;border:0;color:var(--soft);font-size:20px;cursor:pointer}
+#cbody{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px}
+#cbody::-webkit-scrollbar{width:5px}#cbody::-webkit-scrollbar-thumb{background:rgba(167,139,250,.3);border-radius:4px}
+.msg{max-width:85%;padding:11px 15px;border-radius:16px;font-size:14.2px;line-height:1.55;animation:msgin .35s cubic-bezier(.2,.6,.2,1)}
+@keyframes msgin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.msg.bot{background:rgba(255,255,255,.05);border:1px solid var(--line);border-bottom-left-radius:5px;align-self:flex-start;color:var(--ink)}
+.msg.bot b{background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.msg.user{background:linear-gradient(135deg,#7c3aed,#2563eb);border-bottom-right-radius:5px;align-self:flex-end;color:#fff}
+.typing{display:flex;gap:5px;padding:14px 16px;align-self:flex-start;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:16px;border-bottom-left-radius:5px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--violet);animation:tdot 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes tdot{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-6px);opacity:1}}
+.sugg{display:flex;flex-wrap:wrap;gap:7px;padding:0 18px 10px}
+.sugg button{border:1px solid rgba(167,139,250,.35);background:rgba(124,58,237,.08);color:var(--soft);border-radius:999px;padding:6px 13px;font-size:12.5px;cursor:pointer;transition:all .25s}
+.sugg button:hover{color:#fff;border-color:var(--cyan);background:rgba(34,211,238,.12)}
+#cform{display:flex;gap:10px;padding:14px 16px;border-top:1px solid var(--line)}
+#cin{flex:1;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:12px;padding:11px 15px;color:var(--ink);font-size:14px;outline:none;transition:border-color .25s}
+#cin:focus{border-color:rgba(167,139,250,.5)}
+#csend{border:0;border-radius:12px;width:44px;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;font-size:17px;cursor:pointer;transition:transform .2s}
+#csend:hover{transform:scale(1.08)}
+
+/* ====== TERMINAL MODE ====== */
+#term{position:fixed;inset:0;z-index:120;background:rgba(2,3,10,.97);backdrop-filter:blur(10px);display:none;flex-direction:column;font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace}
+#term.open{display:flex;animation:termin .3s ease}
+@keyframes termin{from{opacity:0;transform:scale(1.02)}to{opacity:1;transform:none}}
+#term .t-bar{display:flex;align-items:center;gap:8px;padding:13px 18px;border-bottom:1px solid rgba(52,211,153,.2);background:rgba(255,255,255,.02)}
+#term .t-bar i{width:12px;height:12px;border-radius:50%}
+#term .t-bar i:nth-child(1){background:#ff5f57}#term .t-bar i:nth-child(2){background:#febc2e}#term .t-bar i:nth-child(3){background:#28c840}
+#term .t-bar span{margin-left:10px;color:#56637a;font-size:12.5px}
+#term .t-bar .x{margin-left:auto;background:none;border:1px solid rgba(255,255,255,.15);border-radius:6px;color:#9aa5c4;font-size:12px;padding:4px 12px;cursor:pointer;font-family:inherit}
+#tout{flex:1;overflow-y:auto;padding:22px;font-size:14px;line-height:1.75;color:#c9f7e2}
+#tout::-webkit-scrollbar{width:5px}#tout::-webkit-scrollbar-thumb{background:rgba(52,211,153,.3)}
+#tout .ln{white-space:pre-wrap;word-break:break-word;animation:lnin .15s ease}
+@keyframes lnin{from{opacity:0}to{opacity:1}}
+#tout .cmd-echo{color:#34d399}
+#tout .hl{color:#22d3ee}
+#tout .wn{color:#fbbf24}
+#tout .pk{color:#f472b6}
+#tout a{color:#22d3ee;text-decoration:underline}
+#tline{display:flex;align-items:center;gap:10px;padding:0 22px 22px}
+#tline .ps1{color:#34d399;font-size:14px;white-space:nowrap}
+#tin{flex:1;background:none;border:0;outline:none;color:#e8ecf8;font-family:inherit;font-size:14px;caret-color:#34d399}
+
+@media(max-width:600px){#chat{right:16px;bottom:96px}#orb{right:16px;bottom:20px}}
+
+/* ====== 3D GALAXY MODE ====== */
+#galaxy{position:fixed;inset:0;z-index:110;background:#02030a;display:none}
+#galaxy.open{display:block;animation:termin .35s ease}
+#gcanvas{position:absolute;inset:0;width:100%;height:100%}
+#galaxy .g-top{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:16px 22px;z-index:2;pointer-events:none}
+#galaxy .g-top h3{font-size:15px;letter-spacing:.18em;text-transform:uppercase;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+#galaxy .g-top .x{pointer-events:auto;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:8px 18px;font-size:13px;cursor:pointer;backdrop-filter:blur(8px)}
+#galaxy .g-top .x:hover{border-color:var(--violet)}
+#ghint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);color:var(--faint);font-size:12.5px;letter-spacing:.08em;z-index:2;text-align:center;pointer-events:none}
+#gcard{position:absolute;right:22px;top:70px;width:min(330px,calc(100vw - 44px));z-index:3;border:1px solid rgba(167,139,250,.35);border-radius:18px;background:rgba(10,13,31,.9);backdrop-filter:blur(14px);padding:24px;opacity:0;transform:translateX(20px);pointer-events:none;transition:opacity .35s,transform .35s}
+#gcard.show{opacity:1;transform:none;pointer-events:auto}
+#gcard .g-era{font-size:11.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:6px}
+#gcard h4{font-size:1.15rem;font-weight:750;margin-bottom:2px}
+#gcard .g-role{font-size:13.5px;font-weight:600;background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:12px;display:inline-block}
+#gcard p{font-size:13.5px;color:var(--soft);line-height:1.6;margin-bottom:10px}
+#gcard .g-m{font-size:12.5px;font-weight:700;background:linear-gradient(90deg,var(--cyan),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+#gload{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--soft);font-size:14px;letter-spacing:.12em;z-index:1}
+
+/* ====== GAMIFICATION ====== */
+#xp{display:flex;align-items:center;gap:10px;margin-left:22px;cursor:default}
+#xp .lvl{font-size:11.5px;font-weight:700;letter-spacing:.06em;background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+#xp .xbar{width:64px;height:6px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden}
+#xp .xbar i{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink));transition:width .8s cubic-bezier(.2,.6,.2,1)}
+#toasts{position:fixed;bottom:26px;left:26px;z-index:100;display:flex;flex-direction:column;gap:10px}
+.toast{display:flex;align-items:center;gap:13px;border:1px solid rgba(167,139,250,.4);background:rgba(10,13,31,.94);backdrop-filter:blur(14px);border-radius:14px;padding:13px 18px;box-shadow:0 14px 40px -12px rgba(124,93,250,.5);animation:toastin .45s cubic-bezier(.2,.8,.25,1.1);max-width:320px}
+.toast.out{animation:toastout .4s ease forwards}
+.toast .t-ico{font-size:24px}
+.toast b{display:block;font-size:13.5px}
+.toast small{color:var(--soft);font-size:12px}
+.toast .t-xp{margin-left:auto;font-weight:800;font-size:14px;background:linear-gradient(90deg,var(--cyan),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+@keyframes toastin{from{opacity:0;transform:translateX(-40px) scale(.9)}to{opacity:1;transform:none}}
+@keyframes toastout{to{opacity:0;transform:translateX(-40px)}}
+@media(max-width:760px){#xp .xbar{display:none}#toasts{left:14px;bottom:14px}}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .rv{opacity:1;transform:none}
@@ -202,7 +299,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
       <a href="#highlights">Highlights</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
+      <a href="#" id="galaxylink" style="color:var(--violet)">🌌 Galaxy</a>
     </span>
+    <span id="xp" title="Explore the site to earn XP"><span class="lvl" id="xplvl">LV1 · Visitor</span><span class="xbar"><i id="xpbar"></i></span></span>
   </div>
 </nav>
 
@@ -218,7 +317,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
     </div>
 
     <div class="stats">
-      <div class="stat rv"><b data-count="3" data-prefix="$" data-suffix="M">$0M</b><span>Seed funding raised</span></div>
+      <div class="stat rv"><b data-count="2.5" data-prefix="$" data-suffix="M">$0M</b><span>Seed funding raised</span></div>
       <div class="stat rv d1"><b data-count="3" data-suffix="B+">0B+</b><span>GTV scaled</span></div>
       <div class="stat rv d2"><b data-count="25" data-prefix="0 → ">0 → 0</b><span>Engineers hired &amp; led</span></div>
       <div class="stat rv d3"><b data-count="10" data-suffix="M+">0M+</b><span>Transactions processed</span></div>
@@ -233,10 +332,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
     <h2 class="rv d1">Builder first. <span class="grad">Leader always.</span></h2>
     <div class="about-grid">
       <div class="rv d2">
-        <p>I'm an <b>entrepreneurial technology leader</b> who has spent the last 8+ years doing one thing repeatedly: taking ambitious ideas from a blank repository to platforms serving millions of transactions.</p>
-        <p>As <b>Co-Founder &amp; CTO of LogiPe</b>, I raised ~$3M in seed funding, built an engineering organization from zero to 25 people, and scaled a fintech platform to <b>3B+ GTV</b> — launching prepaid cards, FASTags, fuel wallets, credit lines, and a full fleet-management SaaS along the way.</p>
-        <p>Today at <b>DataFlow Group</b>, I lead AI-driven document verification — LLM pipelines that read, classify, verify, and detect tampering across 500–1,000 cases a day, automating more than half of them with zero human touch.</p>
-        <p>I operate where <b>deep engineering meets business outcomes</b>: banking integrations, AI/LLM systems, infrastructure at scale, and the teams that ship them.</p>
+        <p><b>I build technology that moves money and solves real-world problems — reliably, at scale.</b></p>
+        <p>Over the past 8+ years, I've gone from writing code to co-founding companies and leading 20+ person engineering teams across <b>fintech, edtech, HR tech, and AI automation</b>.</p>
+        <p>As <b>Co-Founder &amp; CTO of LogiPe</b>, I built India's fleet fintech infrastructure from scratch — raised $2.5M in seed funding, grew an engineering org from zero to 25, and scaled to <b>10M+ transactions and 3B+ GTV</b> serving 30K+ customers: prepaid cards on RuPay, FASTag with IDFC Bank, fuel wallets with HPCL/BPCL/JioBP.</p>
+        <p>Today at <b>DataFlow Group</b>, I lead engineering for AI-driven document verification — LLM pipelines that read, classify, verify, and detect tampering across 500–1,000 cases a day, automating more than half of them with zero human touch.</p>
+        <p>What drives me: <b>systems that don't fail, teams that ship</b>, and products that solve real problems for underserved industries.</p>
       </div>
       <div class="orbit-card rv d3">
         <h4>Operating Principles</h4>
@@ -256,7 +356,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
   <div class="wrap">
     <span class="kicker rv">// Experience</span>
     <h2 class="rv d1">A decade of <span class="grad">zero-to-one</span> journeys.</h2>
-    <p class="lead rv d2">Five companies, two founded, every one of them built from the ground up.</p>
+    <p class="lead rv d2">Seven companies, two co-founded — across fintech, edtech, agritech, HR tech &amp; AI.</p>
 
     <div class="timeline">
 
@@ -283,9 +383,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
           <h3>Co-Founder &amp; CTO</h3>
           <span class="t-co">LogiPe Fintech</span>
           <ul>
-            <li><b>Founded &amp; funded:</b> co-founded LogiPe, raised <b>~$3M seed</b>, and built the entire technology org from 0 to 25 engineers across backend, DevOps, mobile, and product.</li>
+            <li><b>Founded &amp; funded:</b> co-founded LogiPe, raised <b>$2.5M seed</b>, and built the entire technology org from 0 to 25 engineers across backend, DevOps, mobile, and product.</li>
             <li><b>Prepaid card program:</b> launched a co-branded RuPay prepaid card with Yes Bank — <b>30,000+ cards</b> distributed to fleet drivers, 10,000+ weekly active at peak.</li>
-            <li><b>FASTag &amp; fuel:</b> integrated FASTag with IDFC Bank (30,000 active tags, <b>10,000+ daily transactions</b>); built fuel-wallet integrations with HPCL, BPCL, and JioBP.</li>
+            <li><b>FASTag &amp; fuel:</b> integrated FASTag with IDFC Bank (30,000 active tags, <b>10,000+ daily transactions</b>) — one of India's largest fleet-focused FASTag platforms; built fuel-wallet integrations with HPCL, BPCL, and JioBP.</li>
             <li><b>Fleet SaaS:</b> architected a full-stack expense &amp; fleet platform — goods tracking, ledgers, LR/Bilty generation, invoicing, payments — for <b>30,000+ customers</b>.</li>
             <li><b>Scale:</b> grew to <b>10M+ transactions and 3B+ GTV</b>; layered credit lines, loans, and insurance products on top of the platform.</li>
           </ul>
@@ -296,8 +396,22 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
       <div class="t-item rv">
         <div class="t-dot"></div>
         <div class="t-card">
-          <div class="t-when">JUN 2020 — DEC 2021 · NOIDA</div>
-          <h3>Senior Software Developer</h3>
+          <div class="t-when">NOV 2021 — DEC 2021 · GURUGRAM</div>
+          <h3>Principal Engineer</h3>
+          <span class="t-co">DeHaat</span>
+          <ul>
+            <li>Implemented <b>offline app record management</b> for seamless functionality in low-connectivity rural environments.</li>
+            <li>Strengthened data protection and system integrity across web, app, and backend for India's leading agritech platform.</li>
+          </ul>
+          <div class="chips"><span class="chip">Engineering</span><span class="chip">Offline-first</span><span class="chip">Security</span><span class="chip">AgriTech</span></div>
+        </div>
+      </div>
+
+      <div class="t-item rv">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-when">JUL 2020 — OCT 2021 · NOIDA</div>
+          <h3>Senior Software Engineer</h3>
           <span class="t-co">Classplus (Bunch Microtechnologies)</span>
           <ul>
             <li>Architected the CI/CD pipeline (Docker, Jenkins, K8s on AWS) and led the company-wide transition from monolith to <b>microservices</b>.</li>
@@ -310,8 +424,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
       <div class="t-item rv">
         <div class="t-dot"></div>
         <div class="t-card">
-          <div class="t-when">APR 2018 — JUN 2020 · NOIDA</div>
-          <h3>Senior Software Developer</h3>
+          <div class="t-when">APR 2018 — JUL 2020 · NOIDA</div>
+          <h3>Senior Software Developer &amp; Team Lead</h3>
           <span class="t-co">Helloverify India</span>
           <ul>
             <li>Built an <b>automatic background-verification engine</b>; designed a UIPATH/Node.js/Python RPA system that replaced manual processes end-to-end.</li>
@@ -324,13 +438,27 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
       <div class="t-item rv">
         <div class="t-dot"></div>
         <div class="t-card">
-          <div class="t-when">JAN 2017 — APR 2018 · GURGAON</div>
+          <div class="t-when">FEB 2017 — MAR 2018 · GURGAON</div>
           <h3>CTO &amp; Co-Founder</h3>
           <span class="t-co">Shopick (Acquire Technologies)</span>
           <ul>
             <li>Built an end-to-end fashion offer-discovery product: Rails/Spree web app, <b>React Native apps (Android &amp; iOS)</b>, and a full admin panel with payment &amp; order management.</li>
           </ul>
-          <div class="chips"><span class="chip">Ruby on Rails</span><span class="chip">Spree</span><span class="chip">React Native</span></div>
+          <div class="chips"><span class="chip">Ruby on Rails</span><span class="chip">Spree</span><span class="chip">React Native</span><span class="chip">MySQL</span></div>
+        </div>
+      </div>
+
+      <div class="t-item rv">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-when">AUG 2016 — DEC 2016 · BENGALURU</div>
+          <h3>Software Developer</h3>
+          <span class="t-co">RockON.me</span>
+          <ul>
+            <li>Designed &amp; deployed a scalable, highly available <b>multi-node OpenStack architecture</b>; built a VM auto-migration algorithm for seamless failover during compute node failures.</li>
+            <li>Integrated Nagios for real-time hardware failure detection and system monitoring. Earlier: interned at RockON (Dec 2014 – Jan 2015) implementing OpenStack for open-source cloud.</li>
+          </ul>
+          <div class="chips"><span class="chip">OpenStack</span><span class="chip">Nagios</span><span class="chip">Network Design</span><span class="chip">Cloud Infra</span></div>
         </div>
       </div>
 
@@ -398,12 +526,12 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
       <div class="s-card rv d1" style="--w:92%">
         <h4><span class="ico">☁️</span> Cloud &amp; DevOps</h4>
         <div class="bar"><i></i></div>
-        <div class="tags"><span class="tag">AWS</span><span class="tag">GCP</span><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Jenkins</span><span class="tag">CI/CD</span><span class="tag">Heroku</span></div>
+        <div class="tags"><span class="tag">AWS</span><span class="tag">GCP</span><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Jenkins</span><span class="tag">CI/CD</span><span class="tag">OpenStack</span><span class="tag">Nagios</span></div>
       </div>
       <div class="s-card rv d2" style="--w:94%">
         <h4><span class="ico">⚙️</span> Backend</h4>
         <div class="bar"><i></i></div>
-        <div class="tags"><span class="tag">Node.js</span><span class="tag">Python</span><span class="tag">Django</span><span class="tag">Ruby on Rails</span><span class="tag">C++</span><span class="tag">PHP</span></div>
+        <div class="tags"><span class="tag">Node.js</span><span class="tag">Python</span><span class="tag">Django</span><span class="tag">Ruby on Rails</span><span class="tag">Distributed Systems</span><span class="tag">C++</span><span class="tag">PHP</span></div>
       </div>
       <div class="s-card rv d3" style="--w:85%">
         <h4><span class="ico">🎨</span> Frontend &amp; Mobile</h4>
@@ -430,7 +558,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
     <h2 class="rv d1">Measured in <span class="grad">impact.</span></h2>
     <div class="counters">
       <div class="counter rv"><b data-count="8" data-suffix="+">0+</b><span>Years building</span></div>
-      <div class="counter rv d1"><b data-count="2">0</b><span>Companies co-founded</span></div>
+      <div class="counter rv d1"><b data-count="7">0</b><span>Companies · 2 co-founded</span></div>
       <div class="counter rv d2"><b data-count="30" data-suffix="K+">0K+</b><span>Cards &amp; FASTags live</span></div>
       <div class="counter rv d3"><b data-count="1000" data-suffix="/day">0/day</b><span>AI verifications</span></div>
       <div class="counter rv d4"><b data-count="5">0</b><span>Banks &amp; oil cos integrated</span></div>
@@ -467,9 +595,50 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
 <footer>
   <div class="wrap">
     <span>© 2026 Tejpal Yadav · Crafted with AI magic ✨</span>
-    <span>Bengaluru, India 🇮🇳</span>
+    <span><a href="#" id="termlink" style="color:var(--faint)">[ terminal mode ~ ]</a> · Bengaluru, India 🇮🇳</span>
   </div>
 </footer>
+
+<!-- ====== AI CHAT ====== -->
+<button id="orb" aria-label="Ask AI about Tejpal">✨</button>
+<div id="chat" role="dialog" aria-label="AI assistant">
+  <div class="c-head">
+    <div class="av">🤖</div>
+    <div><b>TejAI</b><small>online · trained on Tejpal's career</small></div>
+    <button class="x" id="cclose" aria-label="Close">✕</button>
+  </div>
+  <div id="cbody"></div>
+  <div class="sugg" id="csugg"></div>
+  <form id="cform" autocomplete="off">
+    <input id="cin" placeholder="Ask anything about Tejpal..." aria-label="Message">
+    <button id="csend" type="submit">➤</button>
+  </form>
+</div>
+
+<!-- ====== 3D GALAXY ====== -->
+<div id="galaxy" aria-label="3D career galaxy">
+  <div id="gload">INITIALIZING UNIVERSE...</div>
+  <canvas id="gcanvas"></canvas>
+  <div class="g-top"><h3>Career Galaxy</h3><button class="x" id="gclose">✕ Exit orbit</button></div>
+  <div id="gcard">
+    <div class="g-era" id="gc-era"></div>
+    <h4 id="gc-name"></h4>
+    <span class="g-role" id="gc-role"></span>
+    <p id="gc-desc"></p>
+    <div class="g-m" id="gc-metric"></div>
+  </div>
+  <div id="ghint">DRAG to orbit · SCROLL to zoom · CLICK a planet to explore</div>
+</div>
+
+<!-- ====== GAMIFICATION TOASTS ====== -->
+<div id="toasts" aria-live="polite"></div>
+
+<!-- ====== TERMINAL ====== -->
+<div id="term" aria-label="Terminal mode">
+  <div class="t-bar"><i></i><i></i><i></i><span>tejpal@universe: ~/portfolio</span><button class="x" id="tclose">exit ✕</button></div>
+  <div id="tout"></div>
+  <div id="tline"><span class="ps1">tejpal@universe:~$</span><input id="tin" autocomplete="off" spellcheck="false" aria-label="Terminal input"></div>
+</div>
 
 <script>
 /* ===== Starfield ===== */
@@ -534,7 +703,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
 /* ===== Typing effect ===== */
 (function(){
   const lines=[
-    'Co-Founder & CTO — raised $3M, scaled to 3B+ GTV.',
+    'Co-Founder & CTO — raised $2.5M, scaled to 3B+ GTV.',
+    'I build technology that moves money — reliably, at scale.',
     'Building AI document intelligence with LLMs.',
     'Fintech: cards, FASTag, lending — shipped in production.',
     '0 → 25 engineers. 0 → 10M+ transactions.',
@@ -564,9 +734,10 @@ const io2=new IntersectionObserver(es=>{
     const el=e.target,target=+el.dataset.count,
       pre=el.dataset.prefix||'',suf=el.dataset.suffix||'',
       dur=1600,t0=performance.now();
+    const dec=target%1?1:0;
     (function step(t){
       const p=Math.min((t-t0)/dur,1),ease=1-Math.pow(1-p,3);
-      el.textContent=pre+Math.round(target*ease)+suf;
+      el.textContent=pre+(target*ease).toFixed(dec)+suf;
       if(p<1)requestAnimationFrame(step);
     })(t0);
     io2.unobserve(el);
@@ -582,6 +753,371 @@ document.querySelectorAll('.stat,.t-card').forEach(card=>{
     card.style.setProperty('--my',(e.clientY-r.top)+'px');
   });
 });
+
+/* ================= TejAI — offline smart-matching chat ================= */
+(function(){
+  const KB=[
+    {k:['fund','rais','seed','invest','money','$2.5m','2.5m'],a:"Yes! 💰 Tejpal co-founded <b>LogiPe Fintech</b> in Dec 2021 and raised <b>$2.5M in seed funding</b>. He then built the engineering org from 0 → 25 people and scaled the platform to <b>3B+ GTV</b> and 10M+ transactions."},
+    {k:['logipe','fleet','fastag','card','rupay','prepaid','fuel','truck','driver'],a:"At <b>LogiPe</b> (Co-Founder & CTO, 2021–2025) Tejpal built fintech for fleets: a <b>RuPay prepaid card with Yes Bank</b> (30K+ cards, 10K+ weekly active), <b>FASTag with IDFC Bank</b> (30K tags, 10K+ daily transactions), fuel wallets with HPCL/BPCL/JioBP, plus credit lines, loans & insurance. Scaled to <b>3B+ GTV</b>. 🚚"},
+    {k:['dataflow','current','now','today','verification','dmw','document'],a:"Right now Tejpal is a <b>Software Engineering Manager at DataFlow Group</b> (Bengaluru, since Jun 2025). He architected the DMW Verification Portal — <b>500–1,000 cases/day</b>, with <b>50%+ fully automated</b> by AI and turnaround under 30 minutes. ⚡"},
+    {k:['ai','llm','ml','openai','gemini','gpt','ocr','machine learning','artificial'],a:"AI is Tejpal's daily craft 🤖 — he builds <b>LLM pipelines (OpenAI/Gemini)</b> for OCR, document classification, tampering detection, and real-time verification against issuing authorities. He also built a proprietary <b>document fraud detection model</b> and sentiment-analysis bots. His AI even chats with applicants to fix their documents!"},
+    {k:['skill','stack','tech','language','tool','framework','kubernetes','aws','node','python'],a:"Tejpal's arsenal 🛠️ — <b>AI:</b> LLMs, OCR, RPA · <b>Cloud:</b> AWS, GCP, Docker, Kubernetes, Jenkins · <b>Backend:</b> Node.js, Python, Django, Rails · <b>Frontend:</b> React, React Native, Angular · <b>Data:</b> MongoDB, MySQL, Redis, Elasticsearch, RabbitMQ · <b>Fintech:</b> RuPay/Banking APIs, payment gateways."},
+    {k:['experience','career','work','job','history','company','companies','background'],a:"8+ years, 7 companies, 2 co-founded 🚀<br>• <b>DataFlow Group</b> — Eng Manager, AI verification (2025–now)<br>• <b>LogiPe</b> — Co-Founder & CTO, $2.5M raised (2021–25)<br>• <b>DeHaat</b> — Principal Engineer, agritech (2021)<br>• <b>Classplus</b> — Senior SWE, microservices (2020–21)<br>• <b>Helloverify</b> — Senior Dev & Team Lead, RPA (2018–20)<br>• <b>Shopick</b> — CTO & Co-Founder (2017–18)<br>• <b>RockON.me</b> — OpenStack cloud infra (2016)"},
+    {k:['education','iit','college','degree','study','b.tech','btech','university','mandi'],a:"Tejpal graduated from <b>IIT Mandi</b> 🎓 — B.Tech in Computer Science & Engineering (2012–2016)."},
+    {k:['contact','email','reach','hire','touch','connect','linkedin','call','phone'],a:"Reach Tejpal here 📬<br>• Email: <a href='mailto:tez.b12022@gmail.com'>tez.b12022@gmail.com</a><br>• LinkedIn: <a href='https://www.linkedin.com/in/tejpal-yadav/' target='_blank'>linkedin.com/in/tejpal-yadav</a><br>He's open to conversations about engineering leadership, fintech & AI."},
+    {k:['team','lead','manage','hire','people','engineer','org'],a:"Tejpal grew LogiPe's engineering team from <b>0 to 25 engineers</b> across backend, DevOps, mobile & product — hiring, mentoring, and shipping at the same time. His philosophy: <b>hire builders, grow leaders</b>. 👥"},
+    {k:['founder','startup','co-found','entrepreneur','own company'],a:"Tejpal has co-founded <b>two startups</b>: <b>Shopick</b> (fashion offer discovery, 2017) and <b>LogiPe</b> (fleet fintech, $2.5M raised, 3B+ GTV). Zero-to-one is his home turf. 🌱"},
+    {k:['project','built','build','portfolio','proud','best work','highlight'],a:"Signature builds ⭐ — AI Document Intelligence pipeline (50%+ zero-touch), RuPay card program (30K+ cards), FASTag ecosystem (10K+ daily txns), Fleet SaaS (3B+ GTV), proprietary fraud-detection model, and a 1-click QA regression platform. Scroll up to <b>Signature Builds</b> for details!"},
+    {k:['where','location','city','based','bangalore','bengaluru','india'],a:"Tejpal is based in <b>Bengaluru, India</b> 🇮🇳 — previously Noida and Gurgaon."},
+    {k:['who','about','tejpal','summary','intro','tell me'],a:"<b>Tejpal Yadav</b> — Technology Leader & 2x Co-Founder/CTO from IIT Mandi 🚀 He builds technology that moves money — reliably, at scale. 8+ years across fintech, edtech, HR tech & AI: raised $2.5M, scaled to 3B+ GTV, grew a 25-person eng org, and now leads AI document verification processing 1,000 cases/day at DataFlow Group."},
+    {k:['dehaat','agri','farm','rockon','openstack','intern','early career'],a:"Early & in-between chapters 🌱 — At <b>RockON.me</b> (2016) Tejpal built multi-node <b>OpenStack</b> cloud infrastructure with VM auto-migration failover. At <b>DeHaat</b> (2021, Principal Engineer) he built offline-first record management for rural, low-connectivity agritech users."},
+    {k:['hi','hello','hey','namaste','yo','sup'],a:"Hey there! 👋 I'm <b>TejAI</b> — ask me anything about Tejpal's experience, startups, AI work, or how to reach him."},
+    {k:['thank','thanks','great','awesome','cool','nice'],a:"Glad I could help! ✨ Anything else — funding story, tech stack, or how to contact Tejpal?"}
+  ];
+  const SUGG=["Who is Tejpal?","Did he raise funding?","What AI work does he do?","Tech stack?","How do I contact him?","Tell me about LogiPe"];
+  const FALLBACK="Hmm, I don't have that in my training data 🛰️ Try asking about his <b>experience</b>, <b>startups</b>, <b>AI work</b>, <b>skills</b>, or <b>contact info</b> — or email him directly at <a href='mailto:tez.b12022@gmail.com'>tez.b12022@gmail.com</a>.";
+
+  const orb=document.getElementById('orb'),chat=document.getElementById('chat'),
+    body=document.getElementById('cbody'),form=document.getElementById('cform'),
+    inp=document.getElementById('cin'),sugg=document.getElementById('csugg');
+  let booted=false;
+
+  function add(html,who){
+    const d=document.createElement('div');d.className='msg '+who;d.innerHTML=html;
+    body.appendChild(d);body.scrollTop=body.scrollHeight;return d;
+  }
+  function suggest(){
+    sugg.innerHTML='';
+    SUGG.sort(()=>Math.random()-.5).slice(0,3).forEach(q=>{
+      const b=document.createElement('button');b.type='button';b.textContent=q;
+      b.onclick=()=>{inp.value=q;form.requestSubmit()};sugg.appendChild(b);
+    });
+  }
+  function answer(q){
+    const t=q.toLowerCase();
+    let best=null,score=0;
+    for(const e of KB){
+      const s=e.k.reduce((n,k)=>n+(t.includes(k)?(k.length>3?2:1):0),0);
+      if(s>score){score=s;best=e}
+    }
+    return best?best.a:FALLBACK;
+  }
+  function reply(q){
+    const ty=document.createElement('div');ty.className='typing';ty.innerHTML='<i></i><i></i><i></i>';
+    body.appendChild(ty);body.scrollTop=body.scrollHeight;
+    setTimeout(()=>{ty.remove();add(answer(q),'bot');suggest()},650+Math.random()*550);
+  }
+  orb.onclick=()=>{
+    chat.classList.toggle('open');
+    if(chat.classList.contains('open')&&!booted){
+      booted=true;
+      setTimeout(()=>{add("Hi! 👋 I'm <b>TejAI</b>, an assistant trained on Tejpal's career. Ask me anything — funding, AI systems, tech stack, or how to reach him.",'bot');suggest()},350);
+    }
+    if(chat.classList.contains('open'))inp.focus();
+  };
+  document.getElementById('cclose').onclick=()=>chat.classList.remove('open');
+  form.onsubmit=e=>{
+    e.preventDefault();const q=inp.value.trim();if(!q)return;
+    add(q.replace(/[<>]/g,''),'user');inp.value='';reply(q);
+  };
+})();
+
+/* ================= Terminal mode ================= */
+(function(){
+  const term=document.getElementById('term'),out=document.getElementById('tout'),tin=document.getElementById('tin');
+  const P=(s,c)=>{const d=document.createElement('div');d.className='ln'+(c?' '+c:'');d.innerHTML=s;out.appendChild(d);out.scrollTop=out.scrollHeight};
+  const CMDS={
+    help:()=>P(`<span class="hl">Available commands:</span>
+  whoami        — who is this guy
+  experience    — work history
+  skills        — tech arsenal
+  projects      — signature builds
+  education     — where he studied
+  funding       — the $2.5M story
+  contact       — reach Tejpal
+  social        — links
+  sudo hire-me  — 😏
+  clear         — clear screen
+  exit          — back to the universe`),
+    whoami:()=>P(`<span class="pk">Tejpal Yadav</span> — Technology Leader · 2x Co-Founder & CTO · IIT Mandi
+8+ years shipping fintech, SaaS & AI products from zero to scale.
+Currently: Software Engineering Manager @ DataFlow Group, Bengaluru.`),
+    experience:()=>P(`<span class="hl">[2025–now]</span>  DataFlow Group — Eng Manager (AI verification, 1K cases/day, 50%+ automated)
+<span class="hl">[2021–25]</span>   LogiPe — Co-Founder & CTO ($2.5M seed, 0→25 team, 3B+ GTV)
+<span class="hl">[2021]</span>      DeHaat — Principal Engineer (offline-first agritech)
+<span class="hl">[2020–21]</span>   Classplus — Senior SWE (monolith→microservices, CI/CD)
+<span class="hl">[2018–20]</span>   Helloverify — Senior Dev & Team Lead (RPA verification engine)
+<span class="hl">[2017–18]</span>   Shopick — CTO & Co-Founder (fashion discovery app)
+<span class="hl">[2016]</span>      RockON.me — Software Dev (OpenStack cloud infra)`),
+    skills:()=>P(`<span class="hl">AI</span>        LLMs (OpenAI/Gemini) · OCR · Document Intelligence · RPA
+<span class="hl">Cloud</span>     AWS · GCP · Docker · Kubernetes · Jenkins · CI/CD
+<span class="hl">Backend</span>   Node.js · Python · Django · Rails · C++
+<span class="hl">Frontend</span>  React · React Native · Angular
+<span class="hl">Data</span>      MongoDB · MySQL · Redis · Elasticsearch · RabbitMQ · SQS
+<span class="hl">Fintech</span>   RuPay APIs · Banking APIs · Payment Gateways · FASTag`),
+    projects:()=>P(`<span class="pk">★</span> AI Document Intelligence — 50%+ zero-touch, &lt;30min turnaround
+<span class="pk">★</span> RuPay Card Program — 30K+ cards, 10K+ weekly active
+<span class="pk">★</span> FASTag Ecosystem — 30K tags, 10K+ daily transactions
+<span class="pk">★</span> Fleet SaaS — 10M+ txns, 3B+ GTV
+<span class="pk">★</span> Fraud Detection Model — real-time tampering signals
+<span class="pk">★</span> 1-Click QA Platform — full regression in one click`),
+    education:()=>P(`<span class="hl">B.Tech, Computer Science & Engineering</span>
+Indian Institute of Technology (IIT) Mandi · 2012–2016`),
+    funding:()=>P(`<span class="wn">$ 2,500,000</span> seed raised for LogiPe Fintech (Dec 2021)
+→ engineering org: 0 → 25
+→ platform: 0 → 10M+ transactions, 3B+ GTV
+→ products: prepaid cards, FASTag, fuel wallets, credit, insurance`),
+    contact:()=>P(`email:    <a href="mailto:tez.b12022@gmail.com">tez.b12022@gmail.com</a>
+linkedin: <a href="https://www.linkedin.com/in/tejpal-yadav/" target="_blank">linkedin.com/in/tejpal-yadav</a>
+location: Bengaluru, India`),
+    social:()=>CMDS.contact(),
+    'sudo hire-me':()=>P(`<span class="wn">[sudo] permission granted ✔</span>
+Initiating hire sequence... resume parsed, metrics verified.
+Recommendation: <span class="pk">STRONG HIRE</span>. Email <a href="mailto:tez.b12022@gmail.com">tez.b12022@gmail.com</a> to proceed.`),
+    clear:()=>{out.innerHTML=''},
+    exit:()=>close(),
+    ls:()=>P(`experience/  skills/  projects/  education/  contact.txt  funding.log`),
+    pwd:()=>P(`/home/tejpal/portfolio`)
+  };
+  function boot(){
+    out.innerHTML='';
+    P(`<span class="hl">TejOS v8.0</span> — booting career kernel... <span class="wn">done ✔</span>
+Welcome to Tejpal Yadav's terminal portfolio.
+Type <span class="pk">help</span> to see available commands.`);
+  }
+  function open(){term.classList.add('open');boot();setTimeout(()=>tin.focus(),100)}
+  function close(){term.classList.remove('open')}
+  document.getElementById('termlink').onclick=e=>{e.preventDefault();open()};
+  document.getElementById('tclose').onclick=close;
+  addEventListener('keydown',e=>{
+    if(e.key==='~'&&!term.classList.contains('open')&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)){e.preventDefault();open()}
+    if(e.key==='Escape'&&term.classList.contains('open'))close();
+  });
+  tin.addEventListener('keydown',e=>{
+    if(e.key!=='Enter')return;
+    const v=tin.value.trim();tin.value='';
+    P(`<span class="cmd-echo">tejpal@universe:~$</span> ${v.replace(/[<>]/g,'')}`);
+    if(!v)return;
+    const fn=CMDS[v.toLowerCase()];
+    fn?fn():P(`command not found: ${v.replace(/[<>]/g,'')} — try <span class="pk">help</span>`,'wn');
+  });
+  term.addEventListener('click',()=>tin.focus());
+})();
+
+/* ================= Gamification — XP, levels, achievements ================= */
+const Game=(function(){
+  const LS='tej_xp_v1';
+  let st;
+  try{st=JSON.parse(localStorage.getItem(LS))||{xp:0,ach:[]}}catch(e){st={xp:0,ach:[]}}
+  const LEVELS=[[0,'LV1 · Visitor'],[40,'LV2 · Explorer'],[90,'LV3 · Tech Scout'],[150,'LV4 · Recruiter Mode'],[220,'LV5 · Superfan 🏆']];
+  const MAX=220;
+  const lvlEl=document.getElementById('xplvl'),barEl=document.getElementById('xpbar');
+  function save(){try{localStorage.setItem(LS,JSON.stringify(st))}catch(e){}}
+  function level(){let l=LEVELS[0];for(const x of LEVELS)if(st.xp>=x[0])l=x;return l}
+  function render(){
+    lvlEl.textContent=level()[1];
+    barEl.style.width=Math.min(100,st.xp/MAX*100)+'%';
+  }
+  function toast(ico,title,sub,xp){
+    const t=document.createElement('div');t.className='toast';
+    t.innerHTML=`<span class="t-ico">${ico}</span><span><b>${title}</b><small>${sub}</small></span><span class="t-xp">+${xp} XP</span>`;
+    document.getElementById('toasts').appendChild(t);
+    setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),420)},3600);
+  }
+  function award(id,ico,title,sub,xp){
+    if(st.ach.includes(id))return;
+    st.ach.push(id);
+    const before=level()[1];
+    st.xp+=xp;save();render();
+    toast(ico,title,sub,xp);
+    const after=level()[1];
+    if(after!==before)setTimeout(()=>toast('🚀','LEVEL UP!',after,0),1200);
+  }
+  render();
+  if(!st.ach.includes('boot'))setTimeout(()=>award('boot','👋','Welcome aboard','You entered Tejpal\'s universe',10),1800);
+  /* section exploration */
+  const seen=new Set();
+  const secs=['about','experience','highlights','skills','journey','education','contact'];
+  const gio=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(!e.isIntersecting)return;
+      seen.add(e.target.id);gio.unobserve(e.target);
+      if(e.target.id==='experience')award('exp','🗺️','Time Traveler','Explored the career timeline',15);
+      if(e.target.id==='contact')award('end','🏁','Full Orbit','Reached the end of the journey',15);
+      if(seen.size===secs.length)award('all','🧭','Cartographer','Explored every section',25);
+    });
+  },{threshold:.3});
+  secs.forEach(id=>{const el=document.getElementById(id);if(el)gio.observe(el)});
+  /* feature achievements (hooked from other modules) */
+  document.getElementById('orb').addEventListener('click',()=>award('chat','🤖','AI Whisperer','Talked to TejAI',20));
+  document.getElementById('tin').addEventListener('keydown',e=>{if(e.key==='Enter')award('hack','💻','Terminal Hacker','Ran a command like a pro',30)});
+  document.querySelectorAll('a[href^="mailto:"]').forEach(a=>a.addEventListener('click',()=>award('mail','📬','First Contact','Opened a line to Tejpal',25)));
+  return {award};
+})();
+
+/* ================= 3D Career Galaxy (Three.js, lazy-loaded) ================= */
+(function(){
+  const overlay=document.getElementById('galaxy'),
+    openBtn=document.getElementById('galaxylink'),
+    closeBtn=document.getElementById('gclose'),
+    card=document.getElementById('gcard'),
+    loadMsg=document.getElementById('gload');
+  const PLANETS=[
+    {name:'DataFlow Group',era:'2025 — PRESENT',role:'Software Engineering Manager',color:0x22d3ee,size:1.35,dist:7,speed:.45,
+     desc:'AI document verification at scale — LLM pipelines processing 500–1,000 cases/day with 50%+ zero-touch automation.',metric:'⚡ <30 min turnaround · 50%+ automated'},
+    {name:'LogiPe Fintech',era:'2021 — 2025',role:'Co-Founder & CTO',color:0xa78bfa,size:1.8,dist:10,speed:.3,
+     desc:'Co-founded fleet fintech: RuPay cards, FASTag, fuel wallets, credit & insurance. Raised $2.5M, team of 25.',metric:'💰 $2.5M raised · 3B+ GTV · 10M+ txns'},
+    {name:'DeHaat',era:'NOV — DEC 2021',role:'Principal Engineer',color:0x34d399,size:.7,dist:12.5,speed:.26,
+     desc:'Offline-first app record management for rural low-connectivity users; hardened security across India\'s leading agritech platform.',metric:'🌾 Offline-first agritech'},
+    {name:'Classplus',era:'2020 — 2021',role:'Senior Software Engineer',color:0x60a5fa,size:1.1,dist:15,speed:.22,
+     desc:'Led monolith→microservices transition, architected CI/CD on AWS/K8s, built User Management service.',metric:'🧩 Microservices · CI/CD · K8s'},
+    {name:'Helloverify',era:'2018 — 2020',role:'Senior Software Developer & Team Lead',color:0xf472b6,size:1.0,dist:17.5,speed:.17,
+     desc:'Built automatic background-verification engine and end-to-end RPA system with UIPATH, Node.js & Python.',metric:'🤖 Full RPA automation'},
+    {name:'Shopick',era:'2017 — 2018',role:'CTO & Co-Founder',color:0xfbbf24,size:.85,dist:20,speed:.13,
+     desc:'First startup: fashion offer-discovery — Rails web app, React Native apps, full admin & payments.',metric:'🌱 The zero-to-one origin story'},
+    {name:'RockON.me',era:'2016',role:'Software Developer',color:0x94a3b8,size:.6,dist:22.5,speed:.1,
+     desc:'Multi-node OpenStack cloud with VM auto-migration failover and Nagios monitoring — where it all began.',metric:'☁️ OpenStack origins'}
+  ];
+  let inited=false,raf=null,api=null;
+
+  const CDNS=[
+    'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
+    'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js',
+    'https://unpkg.com/three@0.128.0/build/three.min.js'
+  ];
+  function loadScript(src){
+    return new Promise((res,rej)=>{
+      const s=document.createElement('script');
+      s.src=src;s.onload=res;s.onerror=()=>{s.remove();rej(new Error(src))};
+      document.head.appendChild(s);
+    });
+  }
+  async function loadThree(){
+    if(window.THREE)return;
+    for(const url of CDNS){
+      loadMsg.textContent='INITIALIZING UNIVERSE...';
+      try{await loadScript(url);return}catch(e){/* try next CDN */}
+    }
+    throw new Error('all CDNs failed');
+  }
+  function init(){
+    const T=window.THREE,cv=document.getElementById('gcanvas');
+    const renderer=new T.WebGLRenderer({canvas:cv,antialias:true});
+    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+    const scene=new T.Scene();
+    scene.fog=new T.FogExp2(0x02030a,.012);
+    const camera=new T.PerspectiveCamera(60,1,.1,300);
+    /* lights */
+    scene.add(new T.AmbientLight(0x404060,1.2));
+    const sunLight=new T.PointLight(0xffeedd,2,120);scene.add(sunLight);
+    /* sun = career core */
+    const sun=new T.Mesh(new T.SphereGeometry(2.6,40,40),new T.MeshBasicMaterial({color:0xffc966}));
+    scene.add(sun);
+    const glow=new T.Mesh(new T.SphereGeometry(3.4,40,40),new T.MeshBasicMaterial({color:0xff9944,transparent:true,opacity:.18}));
+    scene.add(glow);
+    /* stars */
+    const starGeo=new T.BufferGeometry(),starPos=[];
+    for(let i=0;i<2400;i++){const r=60+Math.random()*180,a=Math.random()*Math.PI*2,b=(Math.random()-.5)*Math.PI;
+      starPos.push(r*Math.cos(a)*Math.cos(b),r*Math.sin(b),r*Math.sin(a)*Math.cos(b));}
+    starGeo.setAttribute('position',new T.Float32BufferAttribute(starPos,3));
+    scene.add(new T.Points(starGeo,new T.PointsMaterial({color:0xaabbee,size:.35,transparent:true,opacity:.85})));
+    /* planets + orbit rings */
+    const meshes=[];
+    PLANETS.forEach((p,i)=>{
+      const m=new T.Mesh(new T.SphereGeometry(p.size,32,32),
+        new T.MeshStandardMaterial({color:p.color,roughness:.45,metalness:.25,emissive:p.color,emissiveIntensity:.25}));
+      m.userData={i,angle:Math.random()*Math.PI*2};
+      scene.add(m);meshes.push(m);
+      const ring=new T.Mesh(new T.RingGeometry(p.dist-.04,p.dist+.04,128),
+        new T.MeshBasicMaterial({color:0x8b7af6,side:T.DoubleSide,transparent:true,opacity:.16}));
+      ring.rotation.x=Math.PI/2;scene.add(ring);
+      if(p.name==='LogiPe Fintech'){ /* saturn-style ring for the big one */
+        const sr=new T.Mesh(new T.RingGeometry(p.size*1.4,p.size*2.1,64),
+          new T.MeshBasicMaterial({color:0xa78bfa,side:T.DoubleSide,transparent:true,opacity:.4}));
+        sr.rotation.x=Math.PI/2.4;m.add(sr);
+      }
+    });
+    /* camera orbit state */
+    let theta=.8,phi=.9,radius=30,dragging=false,px=0,py=0,auto=true;
+    function camPos(){
+      camera.position.set(radius*Math.sin(phi)*Math.cos(theta),radius*Math.cos(phi),radius*Math.sin(phi)*Math.sin(theta));
+      camera.lookAt(0,0,0);
+    }
+    cv.addEventListener('pointerdown',e=>{dragging=true;auto=false;px=e.clientX;py=e.clientY});
+    addEventListener('pointerup',()=>dragging=false);
+    addEventListener('pointermove',e=>{
+      if(!dragging)return;
+      theta+=(e.clientX-px)*.005;phi=Math.max(.25,Math.min(2.6,phi+(e.clientY-py)*.005));
+      px=e.clientX;py=e.clientY;
+    });
+    cv.addEventListener('wheel',e=>{e.preventDefault();radius=Math.max(12,Math.min(70,radius+e.deltaY*.025))},{passive:false});
+    /* touch pinch */
+    let pinch=0;
+    cv.addEventListener('touchmove',e=>{
+      if(e.touches.length===2){
+        const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+        if(pinch)radius=Math.max(12,Math.min(70,radius+(pinch-d)*.06));
+        pinch=d;e.preventDefault();
+      }
+    },{passive:false});
+    cv.addEventListener('touchend',()=>pinch=0);
+    /* picking */
+    const ray=new T.Raycaster(),mv=new T.Vector2();
+    cv.addEventListener('click',e=>{
+      mv.x=(e.clientX/innerWidth)*2-1;mv.y=-(e.clientY/innerHeight)*2+1;
+      ray.setFromCamera(mv,camera);
+      const hit=ray.intersectObjects(meshes)[0];
+      if(hit){
+        const p=PLANETS[hit.object.userData.i];
+        document.getElementById('gc-era').textContent=p.era;
+        document.getElementById('gc-name').textContent=p.name;
+        document.getElementById('gc-role').textContent=p.role;
+        document.getElementById('gc-desc').textContent=p.desc;
+        document.getElementById('gc-metric').innerHTML=p.metric;
+        card.classList.add('show');
+        Game.award('planet','🪐','Planet Hopper','Visited a career planet',20);
+      }else card.classList.remove('show');
+    });
+    function size(){
+      const w=overlay.clientWidth,h=overlay.clientHeight;
+      renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
+    }
+    addEventListener('resize',()=>overlay.classList.contains('open')&&size());
+    const clock=new T.Clock();
+    function loop(){
+      raf=requestAnimationFrame(loop);
+      const dt=clock.getDelta();
+      if(auto)theta+=dt*.06;
+      meshes.forEach(m=>{
+        const p=PLANETS[m.userData.i];
+        m.userData.angle+=dt*p.speed*.5;
+        m.position.set(Math.cos(m.userData.angle)*p.dist,0,Math.sin(m.userData.angle)*p.dist);
+        m.rotation.y+=dt*.6;
+      });
+      glow.scale.setScalar(1+Math.sin(clock.elapsedTime*2)*.04);
+      camPos();renderer.render(scene,camera);
+    }
+    api={size,start(){if(!raf)loop()},stop(){cancelAnimationFrame(raf);raf=null}};
+    size();loadMsg.style.display='none';api.start();
+  }
+  async function open(){
+    overlay.classList.add('open');
+    Game.award('astro','🌌','Astronaut','Entered the Career Galaxy',40);
+    if(inited&&api){api.size();api.start();return}
+    if(inited&&!api)return; // still loading
+    inited=true;
+    try{await loadThree();init()}
+    catch(e){
+      inited=false;
+      loadMsg.innerHTML='3D engine blocked (network/previewer). <button id="gretry" style="margin-left:10px;background:rgba(124,58,237,.25);border:1px solid rgba(167,139,250,.5);color:#e8ecf8;border-radius:8px;padding:6px 16px;cursor:pointer;font-size:13px">Retry</button>';
+      document.getElementById('gretry').onclick=()=>open();
+    }
+  }
+  function close(){overlay.classList.remove('open');card.classList.remove('show');api&&api.stop()}
+  openBtn.addEventListener('click',e=>{e.preventDefault();open()});
+  closeBtn.addEventListener('click',close);
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('open'))close()});
+})();
 </script>
 </body>
 </html>
